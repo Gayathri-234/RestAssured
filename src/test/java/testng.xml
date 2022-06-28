@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite">
+    <test thread-count="0" name="LoginTest">
+        <classes>
+            <class name="io.restassured.RestAssured"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
