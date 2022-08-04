@@ -4,29 +4,18 @@ import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
-public class TC002_PostRequest {
+public class TC003_GETRequest_Req {
     @Test
-    void PostRequestCreateRecord(){
+    void googleMapTest(){
         //specify base url
-        RestAssured.baseURI="https://dummy.restapiexample.com/api/v1";
-        //Request Object
+        RestAssured.baseURI="https://www.google.com";
+        //Request Object creator GET
         RequestSpecification httpRequest=RestAssured.given();
-        //Request Payload Sending along with POST request
-        JSONObject requestParam = new JSONObject();
-        requestParam.put("name","RockyDravidson");
-        requestParam.put("age",30);
-        requestParam.put("salary",50000);
-       // httpRequest.header("Content-Type","application/json");
-        //Attach above data to the request
-        httpRequest.body(requestParam.toJSONString());
-
-        //Sending Request POST
-        Response response = httpRequest.request(Method.POST,"/create");
+        //Response Object
+        Response response = httpRequest.request(Method.GET,"/maps/search/supermarket/@42.0329382,-88.099844,14.22z/data=!3m1!4b1");
         //Print response in console
         String responseBody=response.getBody().asString();
         System.out.println("Response Body is :"+responseBody);
@@ -34,7 +23,6 @@ public class TC002_PostRequest {
         int statusCode=response.getStatusCode();
         System.out.println("Status Code is: "+statusCode);
         Assert.assertEquals(statusCode,200);
-
         //Status Line Validation
         String statusLine=response.getStatusLine();
         System.out.println("Status Line: "+statusLine);
@@ -42,13 +30,7 @@ public class TC002_PostRequest {
         //Content-Type validation
         String contentType=response.getContentType();
         System.out.println("Content-Type is: "+contentType);
-        Assert.assertEquals(contentType,"application/json");
-
-        //Success Code validation
-        String successCode = response.jsonPath().get("status");
-       System.out.println("SuccessCode:"+successCode);
-       Assert.assertEquals(successCode,"success");
-
+        Assert.assertEquals(contentType,"application/json; charset=utf-8");
     }
 
 }

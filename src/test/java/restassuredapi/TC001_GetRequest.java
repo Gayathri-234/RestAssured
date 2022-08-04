@@ -1,3 +1,5 @@
+package restassuredapi;
+
 import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
@@ -17,6 +19,7 @@ public class TC001_GetRequest {
         //Print response in console
         String responseBody=response.getBody().asString();
         System.out.println("Response Body is :"+responseBody);
+
         //Status code validation
         int statusCode=response.getStatusCode();
         System.out.println("Status Code is: "+statusCode);
@@ -30,4 +33,5 @@ public class TC001_GetRequest {
         System.out.println("Content-Type is: "+contentType);
         Assert.assertEquals(contentType,"application/json; charset=utf-8");
     }
+
 }
